@@ -31,3 +31,29 @@ export const productData = [{
   },
 ];
   
+export const sizes = [
+  { value: "XS", label: "XS" },
+  { value: "S", label: "S" },
+  { value: "M", label: "M" },
+  { value: "L", label: "L" },
+  { value: "XL", label: "XL" },
+];
+
+export const infoSections = [
+  {
+    title: "사이즈 & 팁",
+    content: "오버사이즈 핏: 매우 넉넉한 착용감",
+  },
+  {
+    title: "무료 배송 및 반품",
+    content: "여기에 숨겨진 내용이 들어갑니다.",
+  },
+  {
+    title: "리뷰 (0)",
+    content: "리뷰를 남겨주세요.",
+  },
+  {
+    title: "추가 정보",
+    content: "상품정보제공고시<br />",
+  },
+];
