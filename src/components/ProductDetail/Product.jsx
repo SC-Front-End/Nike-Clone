@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { productData } from "../../data/ProductDetailData";
+import { productData, sizes, infoSections } from "../../data/ProductDetailData";
+import SizeButton from "./SizeInput";
+import InfoSection from "./InfoSection";
+
 // import page
 import Nav from "../MainPage/Nav";
 import NavFooter from "../MainPage/NavFooter";
@@ -124,20 +127,6 @@ const SizeFormContainer = styled.div`
   display: flex;
 `;
 
-const SizeInput = styled.button`
-  border: 1px solid rgba(0, 0, 0, 0.1); /* 어두운 테두리 색상 */
-  background-color: rgb(255, 255, 255);
-  width: 70px;
-  height: 50px;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    border: 1px solid black;
-    font-weight: 550;
-  }
-`;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -178,21 +167,7 @@ const ButtonWishList = styled.button`
   }
 `;
 
-const Details = styled.details`
-  border-top: 1px solid #ddd;
-  margin-top: 20px;
-  font-size: 20px;
-  cursor: pointer;
-`;
 
-const Summary = styled.summary`
-  outline: none;
-  user-select: none;
-  list-style: none;
-  padding: 28px 0px;
-`;
-
-const MoreInfoP = styled.p``;
 
 const DetailImgWrapper = styled.div`
   display: flex;
@@ -396,80 +371,28 @@ const Product = ({ selectedProductId: propSelectedProductId }) => {
                 <SizeGuide>사이즈 가이드</SizeGuide>
               </SizeContainer>
               <SizeFormContainer>
-                <SizeInput
-                  type="button"
-                  id="sizeXS"
-                  value="XS"
-                  checked={selectedSize === "XS"}
-                  onClick={() => setSelectedSize("XS")}
-                >
-                  XS
-                </SizeInput>
-                <SizeInput
-                  type="button"
-                  id="S"
-                  value="S"
-                  checked={selectedSize === "S"}
-                  onClick={() => setSelectedSize("S")}
-                >
-                  S
-                </SizeInput>
-                <SizeInput
-                  type="button"
-                  id="M"
-                  value="M"
-                  checked={selectedSize === "M"}
-                  onClick={() => setSelectedSize("M")}
-                >
-                  M
-                </SizeInput>
-                <SizeInput
-                  type="button"
-                  id="L"
-                  value="L"
-                  checked={selectedSize === "L"}
-                  onClick={() => setSelectedSize("L")}
-                >
-                  L
-                </SizeInput>
-                <SizeInput
-                  type="button"
-                  id="XL"
-                  value="XL"
-                  checked={selectedSize === "XL"}
-                  onClick={() => setSelectedSize("XL")}
-                >
-                  XL
-                </SizeInput>
+                {sizes.map((size) => (
+                  <SizeButton
+                    key={size.value}
+                    size={size}
+                    checked={selectedSize === size.value}
+                    onClick={() => setSelectedSize(size.value)}
+                  />
+                ))}
               </SizeFormContainer>
               <ButtonContainer>
                 <ButtonLogin type="submit">로그인 후 구매하기</ButtonLogin>
                 <ButtonWishList>위시리스트 🤍</ButtonWishList>
               </ButtonContainer>
             </FormContainer>
-            <Details onClick={() => setIsReviewOpen(!isReviewOpen)}>
-              <Summary>사이즈 & 팁</Summary>
-              <MoreInfoP>
-                오버사이즈 핏: 매우 넉넉한 착용감
-                <br />
-                사이즈 가이드
-              </MoreInfoP>
-            </Details>
-            <Details onClick={() => setIsReviewOpen(!isReviewOpen)}>
-              <Summary>무료 배송 및 반품</Summary>
-              <MoreInfoP>여기에 숨겨진 내용이 들어갑니다.</MoreInfoP>
-            </Details>
-            <Details onClick={() => setIsReviewOpen(!isReviewOpen)}>
-              <Summary>리뷰 (0)</Summary>
-              <MoreInfoP>리뷰를 남겨주세요.</MoreInfoP>
-            </Details>
-            <Details onClick={() => setIsReviewOpen(!isReviewOpen)}>
-              <Summary>추가 정보</Summary>
-              <MoreInfoP>
-                상품정보제공고시
-                <br />
-              </MoreInfoP>
-            </Details>
+            {infoSections.map((info) => (
+              <InfoSection
+                key={info.id}
+                info={info}
+                isOpen={isReviewOpen}
+                toggleOpen={() => setIsReviewOpen(!isReviewOpen)}
+              />
+            ))}
           </InfoContainer>
         </Wrapper>
         <DetailImgWrapper isopen={isReviewOpen ? "true" : "false"}>

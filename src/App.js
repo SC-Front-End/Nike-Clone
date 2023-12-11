@@ -20,7 +20,7 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/event" element={<EventMainPage />} />
             {/* 잊지말자 productList */}
